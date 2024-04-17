@@ -69,7 +69,7 @@ def main():
         sys.exit("Person not found.")
 
     path = shortest_path(source, target)
-    
+
     if path is None:
         print("Not connected.")
     else:
@@ -100,13 +100,13 @@ def shortest_path(source, target):
 
     while True:
         if frontier.empty():
-            raise Exception("no solution")
+            return
 
         else:
 
             node = frontier.remove()
-          
-            
+
+
             sol = []
             if node.state == target:
                 while node.parent is not None:
@@ -115,18 +115,18 @@ def shortest_path(source, target):
                     node = node.parent
                     sol.reverse()
                 return sol
-            
+
             explored.add(node.state)
 
             for movie_id, person_id in neighbors_for_person(node.state):
                 if not frontier.contains_state(person_id) and person_id not in explored:
                     child = Node(state=person_id, parent=node, action=movie_id)
                     frontier.add(child),
-                           
-             
+
+
     #neigbors_for_person fonksiyonu o aynı kişinin başka filmlerindeki idlerinide veriyor onlara bakmaya gerek yok
-    
-       
+
+
 def person_id_for_name(name):
     """
     Returns the IMDB id for a person's name,
